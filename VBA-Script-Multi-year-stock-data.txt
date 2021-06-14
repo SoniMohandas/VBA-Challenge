@@ -1,0 +1,65 @@
+Sub multipleYearStockData():
+
+    ' loop through each worksheet in this workbook
+    For Each ws In ThisWorkbook.Worksheets
+    
+        'declaring counting variables and other meaningful variables
+        Dim iCout, jCount, kCount, lastRow As Long
+        Dim yearly_change, open_price, close_price As Double
+        Dim yearly_perc, stock_volume As Double
+        Dim ticker_name As String
+    
+        lastRow = ws.Cells(Rows.Count, 1).End(xlUp).Row         'to find the last row of each worksheet
+    
+        iCount = 2                                              'initializing two counting variables to start from row two
+        kCount = 2                                              'initializing counting variable to print output cell
+    
+        Do While iCount <= lastRow                              ' looping through to the last row
+            ticker_name = ws.Cells(iCount, 1).Value             'assigning first cell value to ticker name
+            open_price = ws.Cells(iCount, 3).Value              'assigning first cell value to open price
+        
+            jCount = iCount                                     'assigning value of iCount to jCount
+            stock_volume = 0                                    'initializing stock volume
+        
+            'looping to sum stock volume and to find the next ticker name cell
+            Do Until ws.Cells(jCount, 1).Value <> ticker_name
+                stock_volume = stock_volume + ws.Cells(jCount, 7).Value
+                jCount = jCount + 1
+            Loop
+            
+            close_price = ws.Cells(jCount - 1, 6).Value         'assigning value to close price, it is lessthan of jCount value
+            ws.Cells(kCount, 9).Value = ticker_name             'printing ticker name to the output cell
+            yearly_change = close_price - open_price            'calculating yearly change
+            ws.Cells(kCount, 10).Value = yearly_change          'assigning yearly change to the output cell
+        
+            'condition checking for non zero open price
+            If open_price <> 0 Then
+                yearly_perc = yearly_change / open_price        'calculating yearly percentage
+            End If
+        
+            'conditional formating based on the negative or positive value of yearly percentage
+            If yearly_perc < 0 Then
+                ws.Cells(kCount, 11).Interior.ColorIndex = 3    'assigning red color to negative cell values
+            ElseIf yearly_perc > 0 Then
+                ws.Cells(kCount, 11).Interior.ColorIndex = 4    'assigning green color to positive cell values
+            End If
+            
+            ws.Cells(kCount, 11).Value = Format(yearly_perc, "Percent")     'formatting yearly percent to get the percentage symbol with two decimal places
+            ws.Cells(kCount, 12).Value = stock_volume                       'assigning stock volume to output cell
+            iCount = jCount                                                 'assigning value of jCount to iCount to find next ticker
+            kCount = kCount + 1                                             'kCount incrementing by 1 for the next output print
+        
+        Loop
+        
+        'assigning header names to the respective output cells
+        ws.Range("I1").Value = "Ticker"
+        ws.Range("J1").Value = "Yearly Change"
+        ws.Range("K1").Value = "Percent Change"
+        ws.Range("L1").Value = "Total Stock Volume"
+    
+        ws.Cells.EntireColumn.AutoFit                           'autofitting the cells based on the values
+    
+    Next ws
+
+End Sub
+
