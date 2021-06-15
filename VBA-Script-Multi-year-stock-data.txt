@@ -2,7 +2,7 @@ Sub multipleYearStockData():
 
     ' loop through each worksheet in this workbook
     For Each ws In ThisWorkbook.Worksheets
-    
+    eriuer
         'declaring counting variables and other meaningful variables
         Dim iCout, jCount, kCount, lastRow As Long
         Dim yearly_change, open_price, close_price As Double
