@@ -82,7 +82,7 @@ Sub multipleYearStockData():
                 ticker3 = ws.Cells(iGreat, 9).Value
             End If
         Next iGreat
-        aakjdfkj
+        
         'assigning values to corresponding output cells
         ws.Cells(1, 15).Value = "Ticker"
         ws.Cells(1, 16).Value = "Value"
