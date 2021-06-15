@@ -55,7 +55,7 @@ Sub multipleYearStockData():
         ws.Range("I1").Value = "Ticker"
         ws.Range("J1").Value = "Yearly Change"
         ws.Range("K1").Value = "Percent Change"
-        ws.Range("L1").Value = "Total Stock Volume"                 'adk adfk 
+        ws.Range("L1").Value = "Total Stock Volume"                 
     
         'to find the greatest % of increase, greatest % of decrease, greatest total volume declaring another variables
         Dim iGreat, lastRow1 As Long
