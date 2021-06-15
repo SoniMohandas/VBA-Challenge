@@ -99,7 +99,7 @@ Sub multipleYearStockData():
         ws.Cells(4, 15).Value = ticker3
         ws.Cells(4, 16).Value = gr_tot_volume
     
-        'autofitting the cells based on the values
+        'autofitting all the cells based on their values
         ws.Cells.EntireColumn.AutoFit
     
     Next ws
