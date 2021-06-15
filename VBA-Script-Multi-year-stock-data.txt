@@ -26,7 +26,7 @@ Sub multipleYearStockData():
                 stock_volume = stock_volume + ws.Cells(jCount, 7).Value
                 jCount = jCount + 1
             Loop
-swapnam            
+           
             close_price = ws.Cells(jCount - 1, 6).Value         'assigning value to close price, it is lessthan of jCount value
             ws.Cells(kCount, 9).Value = ticker_name             'printing ticker name to the output cell
             yearly_change = close_price - open_price            'calculating yearly change
