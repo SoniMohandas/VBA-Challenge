@@ -1,5 +1,5 @@
 Sub multipleYearStockData():
-lkajf
+
     ' loop through each worksheet in this workbook
     For Each ws In ThisWorkbook.Worksheets
     
