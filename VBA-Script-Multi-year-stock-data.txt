@@ -8,7 +8,7 @@ Sub multipleYearStockData():
         Dim yearly_change, open_price, close_price As Double
         Dim yearly_perc, stock_volume As Double
         Dim ticker_name As String
-    Akasam
+    
         lastRow = ws.Cells(Rows.Count, 1).End(xlUp).Row         'to find the last row of each worksheet
     
         iCount = 2                                              'initializing two counting variables to start from row two
