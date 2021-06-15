@@ -57,9 +57,48 @@ Sub multipleYearStockData():
         ws.Range("K1").Value = "Percent Change"
         ws.Range("L1").Value = "Total Stock Volume"
     
-        ws.Cells.EntireColumn.AutoFit                           'autofitting the cells based on the values
+        'to find the greatest % of increase, greatest % of decrease, greatest total volume declaring another variables
+        Dim iGreat, lastRow1 As Long
+        Dim gr_perc_increase, gr_perc_decrease, gr_tot_volume As Double
+        Dim ticker1, ticker2, ticker3 As String                         'Variables to find greatest % increase, greatest % decrease, greatest total volume ticker names
+        
+        lastRow1 = ws.Cells(Rows.Count, 11).End(xlUp).Row               'to find the last row of yearly percent
+    
+        gr_perc_increase = 0
+        gr_perc_decrease = 0
+        gr_tot_volume = 0
+    
+        'loop to find max, min and max total volume
+        For iGreat = 2 To lastRow1
+            If ws.Cells(iGreat, 11).Value > gr_perc_increase Then       ' conditions to find gt % percent, gt % percent, gt total volume
+                gr_perc_increase = ws.Cells(iGreat, 11).Value
+                ticker1 = ws.Cells(iGreat, 9).Value
+            ElseIf ws.Cells(iGreat, 11).Value < gr_perc_decrease Then
+                gr_perc_decrease = ws.Cells(iGreat, 11).Value
+                ticker2 = ws.Cells(iGreat, 9).Value
+            End If
+            If ws.Cells(iGreat, 12).Value > gr_tot_volume Then
+                gr_tot_volume = ws.Cells(iGreat, 12).Value
+                ticker3 = ws.Cells(iGreat, 9).Value
+            End If
+        Next iGreat
+        
+        'assigning values to corresponding output cells
+        ws.Cells(1, 15).Value = "Ticker"
+        ws.Cells(1, 16).Value = "Value"
+        ws.Cells(2, 14).Value = "Greatest % of increase"
+        ws.Cells(3, 14).Value = "Greatest % of decrease"
+        ws.Cells(4, 14).Value = "Greatest total volume"
+        ws.Cells(2, 15).Value = ticker1
+        ws.Cells(2, 16).Value = Format(gr_perc_increase, "Percent")
+        ws.Cells(3, 15).Value = ticker2
+        ws.Cells(3, 16).Value = Format(gr_perc_decrease, "Percent")
+        ws.Cells(4, 15).Value = ticker3
+        ws.Cells(4, 16).Value = gr_tot_volume
+    
+        'autofitting the cells based on the values
+        ws.Cells.EntireColumn.AutoFit
     
     Next ws
-
 End Sub
 
